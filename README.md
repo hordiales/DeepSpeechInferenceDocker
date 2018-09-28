@@ -14,7 +14,7 @@ Available pre-trained English model is about 2.1 GB, get patient. Uncomment wget
 
 Docker image build
 
-	$ docker build -t deepspeech-inference -f ./Dockerfile .
+	$ docker build -t deepspeech-inference .
 
 #### Create a compatible wav file
 
