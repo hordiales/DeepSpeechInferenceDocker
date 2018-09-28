@@ -22,14 +22,11 @@ Currently only WAVE files with 16-bit, 16 kHz, mono are supported in the Python 
 
 	$ ffmpeg -i INPUT_AUDIO_FILE -ar 16000 -af aformat=s16:16000 -ac 1 audio_16k.wav
 
-#### Run the inference
+#### Run the inference from command line
 
-	$ docker run -it --rm -v /your/path/models:/models -v /your/path/audio_16k.wav:/audio.wav
-	--entrypoint bash deepspeech-inference
+Process input_audio_16k.wav and throws the text output to console
 
-	(container)$ deepspeech --model /models/output_graph.pb --alphabet
-	/models/alphabet.txt --lm /models/lm.binary --trie /models/trie
-	--audio /audio.wav"
+	$ docker run -it --rm -v /your/path/models:/models -v /your/path/audio/input_audio_16k.wav:/audio.wav deepspeech-inference
 
 Note: with the pre-trained model embedded in the docker image, run it without '-v /your/path/models:/models'
 
