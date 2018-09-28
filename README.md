@@ -8,19 +8,30 @@ This is a dockerfile to run inference with the pre-trained english model.
 
 #### Build the image
 
-	$ docker build -t deepspeech -f ./Dockerfile .
+Available pre-trained English model is about 2.1 GB, get patient. Uncomment wget line in Dockerfile or download it by hand.
 
-WARNING: English model is about 2.1 GB , get patient
+	$ wget -O - https://github.com/mozilla/DeepSpeech/releases/download/v0.2.0/deepspeech-0.2.0-models.tar.gz | tar xvfz -
+
+Docker image build
+
+	$ docker build -t deepspeech-inference -f ./Dockerfile .
+
+#### Create a compatible wav file
+
+Currently only WAVE files with 16-bit, 16 kHz, mono are supported in the Python client)
+
+	$ ffmpeg -i INPUT_AUDIO_FILE -ar 16000 -af aformat=s16:16000 -ac 1 audio_16k.wav
 
 #### Run the inference
 
-	$ docker run -it --rm -v /your/path/audio-test-16k.wav:/audio.wav
-	--entrypoint bash deepspeech
+	$ docker run -it --rm -v /your/path/models:/models -v /your/path/audio_16k.wav:/audio.wav
+	--entrypoint bash deepspeech-inference
 
 	(container)$ deepspeech --model /models/output_graph.pb --alphabet
 	/models/alphabet.txt --lm /models/lm.binary --trie /models/trie
 	--audio /audio.wav"
 
+Note: with the pre-trained model embedded in the docker image, run it without '-v /your/path/models:/models'
 
 #### Log
 
