@@ -1,6 +1,6 @@
 Project [DeepSpeech](https://github.com/mozilla/DeepSpeech]DeepSpeech) is an open source Speech-To-Text engine, using a model trained by machine learning techniques, based on Baidu's Deep Speech research paper. Project DeepSpeech uses Google's TensorFlow project to make the implementation easier.
 
-This is a dockerfile to run inference with the pre-trained english model.
+This is a dockerfile to run inference with the pre-trained english model that runs without GPU support.
 
 	Tested with DeepSpeech version: 0.2.0a8
 

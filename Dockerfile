@@ -1,4 +1,5 @@
 FROM gcr.io/google_containers/ubuntu-slim:0.6
+# Runs inference without GPU support
 # Usage:
 #        $ docker build -t deepspeech-inference .
 #        $ docker run -it --rm -v /your/path/models:/models -v /your/path/audio/input_audio_16k.wav:/audio.wav deepspeech-inference
@@ -21,8 +22,8 @@ RUN pip3 install deepspeech==0.2.0a8
 # ADD DeepSpeech/models /models
 
 # (optional) ffmpeg to build mono and 16kHz wav files
-RUN apt-get install -y ffmpeg
-ADD compatible_wav.sh /compatible_wav.sh
+# RUN apt-get install -y ffmpeg
+# ADD compatible_wav.sh /compatible_wav.sh
 
 # CMD ["deepspeech", "--model", "/models/output_graph.pb", "--alphabet", "/models/alphabet.txt", "--lm", "/models/lm.binary", "--trie", "/models/trie", "--audio", "/audio.wav" ]
 ENTRYPOINT ["deepspeech", "--model", "/models/output_graph.pb", "--alphabet", "/models/alphabet.txt", "--lm", "/models/lm.binary", "--trie", "/models/trie", "--audio", "/audio.wav" ]
